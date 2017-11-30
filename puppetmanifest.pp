@@ -3,7 +3,8 @@
 dpkg-query -W -f='${Status} ${Version}\n' name_pckg
 */
 
-/*----------------------CREATING THE USER AND THE GROUP---------------*/
+/*----------------------CREATING THE USER AND THE GROUP------------*/
+/*-----------------------------------------------------------------*/
 group { 'etudiants':
 	ensure => 'present',
 	gid    => '1002', 	#groupe id
@@ -23,6 +24,7 @@ user { 'etudiant':
      }
 
 /*------------------------COMMON-----------------------------------*/
+/*-----------------------------------------------------------------*/
 
 # installation of  'sudo','gzip'
 
@@ -30,44 +32,45 @@ user { 'etudiant':
 
 
 # !!puppet
-# Notepad++
-# apache
+# apache(2)
 # SSH
 
-/*
+
 $enhancers= ['sudo', 'gzip', 'emacs', 'vim']
 package { $enhancers: 
 	ensure => 'installed',
 	}
-	*/
+	
 
-
+#another variant of representation
+/*
 package {'vim':
 	ensure => 'installed',
 }
+*/
 
 /*------------------------PART FOR PROGRAMMER----------------------*/
-
+/*-----------------------------------------------------------------*/
 
 # installation of 'git', 'gcc', 'g++'.
 # text editor - geany
 # memory check- valgrind
+
+/*	NEEDED ALSO*/
+ /*
+ Eclipse
+ 
+ */
 
 
 $enhancers_prog = ['git', 'gcc', 'g++', 'geany', 'valgrind']
 package { $enhancers_prog:
 	ensure => 'installed',
 	}
-
-
-/*
-package {'git':
-	ensure => 'installed',
-}*/
-
-     
+    
 
 /*-----------------------PART FOR SYS ADMIN------------------------*/
+/*-----------------------------------------------------------------*/
  #'filezilla' - licensed FTP client and Server.
  # 'netcat' - network utility
  

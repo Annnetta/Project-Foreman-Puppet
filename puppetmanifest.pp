@@ -1,4 +1,8 @@
 
+/*Verify is the package installed
+dpkg-query -W -f='${Status} ${Version}\n' name_pckg
+*/
+
 /*----------------------CREATING THE USER AND THE GROUP---------------*/
 group { 'etudiants':
 	ensure => 'present',
@@ -18,13 +22,42 @@ user { 'etudiant':
 	expiry	=> '2021-09-01'	# The expiry date for this user. YYYY-MM-DD 	3 Ans de licence a aprtie de septembre 2018 
      }
 
+/*------------------------COMMON-----------------------------------*/
 
-/*------------------------PART FOR PROGRAMMER-------------------------*/
+# installation of  'sudo','gzip'
 
-# installation of git, sudo, 'gcc', 'g++', 'gzip'.
+/* ALSO NEEDED*/
 
-$enhancers = ['git', 'sudo', 'gcc', 'g++', 'gzip']
-package { $enhancers: ensure => 'installed' }
+
+# !!puppet
+# Notepad++
+# apache
+# SSH
+
+/*
+$enhancers= ['sudo', 'gzip', 'emacs', 'vim']
+package { $enhancers: 
+	ensure => 'installed',
+	}
+	*/
+
+
+package {'vim':
+	ensure => 'installed',
+}
+
+/*------------------------PART FOR PROGRAMMER----------------------*/
+
+
+# installation of 'git', 'gcc', 'g++'.
+# text editor - geany
+# memory check- valgrind
+
+
+$enhancers_prog = ['git', 'gcc', 'g++', 'geany', 'valgrind']
+package { $enhancers_prog:
+	ensure => 'installed',
+	}
 
 
 /*
@@ -34,8 +67,31 @@ package {'git':
 
      
 
+/*-----------------------PART FOR SYS ADMIN------------------------*/
+ #'filezilla' - licensed FTP client and Server.
+ # 'netcat' - network utility
+ 
+ /*	NEEDED ALSO*/
+ /*
+ VMware or VBox
+ 
+ */
+ 
+ 
+$enhancers_sys = ['wireshark', 'filezilla', 'netcat', ]   
+package { $enhancers_sys:
+	ensure => 'installed',
+	}
+	
 
-     
-     
+/*--------------------DELETE INSTALLED PACKAGES-------*/
+#it is necessary to comment the previous lines qnd uncomment these
 
 
+/*
+$enhancers_del = ['wireshark', 'filezilla', 'netcat', 'vim', 'gcc', 'g++', 'valgrind' ]   
+package { $enhancers_del:
+	ensure => 'absent',
+	}
+	
+*/
